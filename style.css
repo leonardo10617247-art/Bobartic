@@ -1,0 +1,462 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0b0c10;
+    color: #c5c6c7;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.screen {
+    display: none;
+    height: 100vh;
+    width: 100vw;
+}
+
+.screen.active {
+    display: flex;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- TELA DE LOGIN / CADASTRO --- */
+#auth-screen {
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0b0c10, #1f2833);
+}
+
+.auth-box {
+    background-color: #1f2833;
+    padding: 30px;
+    border-radius: 10px;
+    border: 2px solid #45a29e;
+    text-align: center;
+    box-shadow: 0 0 20px #45a29e;
+    width: 350px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.auth-box h1 {
+    color: #66fcf1;
+    margin-bottom: 10px;
+    letter-spacing: 3px;
+}
+
+.auth-box p {
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.auth-box input, .auth-box select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #45a29e;
+    background-color: #0b0c10;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.auth-box button {
+    width: 100%;
+    padding: 10px;
+    background-color: #45a29e;
+    color: #0b0c10;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    margin-bottom: 8px;
+}
+
+.auth-box button:hover {
+    background-color: #66fcf1;
+    box-shadow: 0 0 10px #66fcf1;
+}
+
+.btn-secondary {
+    background-color: transparent !important;
+    border: 1px solid #45a29e !important;
+    color: #45a29e !important;
+}
+
+.btn-secondary:hover {
+    background-color: #45a29e !important;
+    color: #0b0c10 !important;
+}
+
+.msg {
+    color: #ff4c4c;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.file-label {
+    display: block;
+    background-color: #0b0c10;
+    border: 1px dashed #45a29e;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.file-label:hover {
+    background-color: #15171a;
+}
+
+#reg-photo {
+    display: none;
+}
+
+.avatar-preview {
+    margin-bottom: 10px;
+}
+
+.avatar-preview img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #45a29e;
+}
+
+/* --- TELA DO JOGO --- */
+#game-screen {
+    flex-direction: column;
+}
+
+header {
+    background-color: #1f2833;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #45a29e;
+}
+
+header h2 {
+    color: #66fcf1;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+#header-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #66fcf1;
+}
+
+header button {
+    background-color: #45a29e;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+main {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    gap: 20px;
+    overflow: hidden;
+}
+
+/* Área de Desenho */
+.draw-area {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.turn-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1f2833;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #45a29e;
+}
+
+.turn-info h3 {
+    color: #66fcf1;
+}
+
+#timer-display {
+    color: #ff4c4c;
+    font-size: 28px;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.canvas-container {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 3px solid #45a29e;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    cursor: crosshair;
+    background-color: #ffffff;
+}
+
+/* --- CORREÇÃO DO SISTEMA DE CORES E FERRAMENTAS --- */
+.tools {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background-color: #1f2833;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #45a29e;
+}
+
+/* Estilo para o seletor de cor ficar grande e visível */
+#color-picker {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 60px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid #66fcf1;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0;
+}
+
+#color-picker::-webkit-color-swatch-wrapper {
+    padding: 2px;
+}
+
+#color-picker::-webkit-color-swatch {
+    border: none;
+    border-radius: 3px;
+}
+
+/* Estilo para o tamanho do pincel */
+#brush-size {
+    width: 150px;
+    cursor: pointer;
+    accent-color: #66fcf1;
+}
+
+/* Label para o tamanho do pincel */
+.tools label {
+    color: #c5c6c7;
+    font-size: 14px;
+}
+
+.tools button {
+    padding: 10px 20px;
+    background-color: #ff4c4c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.tools button:hover {
+    background-color: #ff1a1a;
+    box-shadow: 0 0 10px #ff4c4c;
+}
+
+.theme-box {
+    background-color: #1f2833;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #45a29e;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.theme-box h3 {
+    color: #66fcf1;
+    font-size: 16px;
+}
+
+.theme-box select {
+    padding: 8px;
+    background-color: #0b0c10;
+    color: #fff;
+    border: 1px solid #45a29e;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.theme-box button {
+    padding: 10px;
+    background-color: #66fcf1;
+    color: #0b0c10;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+.theme-box button:hover {
+    background-color: #45a29e;
+    color: #fff;
+}
+
+/* Painel Lateral (Chat e Curiosidades) */
+.side-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.chat-box, .curiosity-box {
+    background-color: #1f2833;
+    border: 1px solid #45a29e;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-box {
+    flex: 2;
+}
+
+.curiosity-box {
+    flex: 1;
+}
+
+.chat-box h3, .curiosity-box h3 {
+    color: #66fcf1;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #45a29e;
+    padding-bottom: 5px;
+}
+
+#chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    background-color: #0b0c10;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.chat-input {
+    display: flex;
+    gap: 5px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #45a29e;
+    background-color: #0b0c10;
+    color: white;
+    border-radius: 5px;
+}
+
+.chat-input button {
+    padding: 8px 15px;
+    background-color: #45a29e;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #0b0c10;
+    font-weight: bold;
+}
+
+.curiosity-box p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    flex: 1;
+}
+
+.curiosity-box button {
+    padding: 8px;
+    background-color: #45a29e;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #0b0c10;
+    font-weight: bold;
+}
+
+/* Modal de Fim de Jogo */
+.modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: #1f2833;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid #66fcf1;
+}
+
+.modal-content h2 {
+    color: #66fcf1;
+    margin-bottom: 20px;
+}
+
+.modal-content button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #45a29e;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Classes de mensagem do chat */
+.chat-msg { color: #c5c6c7; }
+.chat-correct { color: #66fcf1; font-weight: bold; }
+.chat-wrong { color: #ff4c4c; }
+.chat-system { color: #ffd700; font-style: italic; }
