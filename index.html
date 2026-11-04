@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bobartic - O Jogo de Desenho</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Tela de Login / Cadastro -->
+    <div id="auth-screen" class="screen active">
+        <div class="auth-box" id="login-box">
+            <h1>BOBARTIC</h1>
+            <p>O mundo virtual onde sua criatividade vale pontos!</p>
+            <input type="text" id="login-username" placeholder="Nome de usuário">
+            <input type="password" id="login-password" placeholder="Senha">
+            <button onclick="login()">Entrar</button>
+            <button class="btn-secondary" onclick="showRegister()">Criar Nova Conta</button>
+            <p id="auth-msg" class="msg"></p>
+        </div>
+
+        <div class="auth-box hidden" id="register-box">
+            <h1>Criar Conta</h1>
+            <div class="avatar-preview">
+                <img id="avatar-preview-img" src="https://via.placeholder.com/80?text=?" alt="Avatar">
+            </div>
+            <input type="text" id="reg-username" placeholder="Nome de usuário (login)">
+            <input type="password" id="reg-password" placeholder="Senha">
+            <input type="text" id="reg-displayname" placeholder="Nome de perfil (exibido)">
+            <select id="reg-nationality">
+                <option value="">Selecione sua nacionalidade...</option>
+                <option value="Brasil">Brasil</option>
+                <option value="Portugal">Portugal</option>
+                <option value="Estados Unidos">Estados Unidos</option>
+                <option value="Argentina">Argentina</option>
+                <option value="Japão">Japão</option>
+                <option value="França">França</option>
+                <option value="Espanha">Espanha</option>
+                <option value="Itália">Itália</option>
+                <option value="Alemanha">Alemanha</option>
+                <option value="Canadá">Canadá</option>
+                <option value="Outro">Outro</option>
+            </select>
+            <label for="reg-photo" class="file-label">Escolher Foto de Perfil</label>
+            <input type="file" id="reg-photo" accept="image/*" onchange="previewAvatar(event)">
+            <button onclick="register()">Criar Conta</button>
+            <button class="btn-secondary" onclick="showLogin()">Voltar para Login</button>
+            <p id="reg-msg" class="msg"></p>
+        </div>
+    </div>
+
+    <!-- Tela Principal do Jogo -->
+    <div id="game-screen" class="screen">
+        <header>
+            <h2>Bobartic</h2>
+            <div class="user-info">
+                <img id="header-avatar" src="https://via.placeholder.com/30?text=?" alt="Avatar">
+                <span id="header-displayname"></span> 
+                (<span id="header-nationality"></span>)
+                | Pontos: <span id="player-score">0</span>/100
+            </div>
+            <button onclick="logout()">Sair</button>
+        </header>
+
+        <main>
+            <!-- Área do Desenho -->
+            <section class="draw-area">
+                <div class="turn-info">
+                    <h3 id="turn-status">Aguardando jogadores...</h3>
+                    <h2 id="timer-display">02:00</h2>
+                </div>
+
+                <div class="canvas-container">
+                    <canvas id="canvas" width="600" height="400"></canvas>
+                </div>
+                <div class="tools" id="draw-tools" style="display: none;">
+                    <input type="color" id="color-picker" value="#000000" title="Escolha a cor">
+                    <input type="range" id="brush-size" min="1" max="20" value="5" title="Tamanho do pincel">
+                    <button onclick="clearCanvas()">Limpar</button>
+                </div>
+                
+                <div class="theme-box" id="theme-box" style="display: none;">
+                    <h3>Escolha o Tema:</h3>
+                    <select id="theme-select">
+                        <!-- Opções preenchidas via JS -->
+                    </select>
+                    <button id="btn-start-round" onclick="startDrawingTurn()">Iniciar Desenho</button>
+                </div>
+            </section>
+
+            <!-- Área do Chat e Curiosidades -->
+            <section class="side-panel">
+                <div class="chat-box">
+                    <h3>Chat (Adivinhe o tema!)</h3>
+                    <div id="chat-messages"></div>
+                    <div class="chat-input" id="chat-input-area">
+                        <input type="text" id="chat-input" placeholder="Digite seu palpite..." onkeypress="handleChatEnter(event)">
+                        <button onclick="sendChat()">Enviar</button>
+                    </div>
+                </div>
+
+                <div class="curiosity-box">
+                    <h3>Aba de Curiosidades</h3>
+                    <p id="curiosity-text">Clique no botão para ver uma curiosidade!</p>
+                    <button onclick="nextCuriosity()">Próxima Curiosidade</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Modal de Fim de Jogo -->
+        <div id="game-over-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="game-over-title">Fim de Jogo!</h2>
+                <p id="game-over-msg"></p>
+                <button onclick="restartGame()">Jogar Novamente</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
